@@ -1,0 +1,12 @@
+---
+- name: DROP TCP port 22 (SSH) in ens224
+  iptables:
+    chain: INPUT
+    in_interface: ens224
+    protocol: tcp
+    destination_port: 22
+    jump: DROP
+    comment: Disable SSH connections.
+  notify:
+    - iptables save
+    - iptables restart

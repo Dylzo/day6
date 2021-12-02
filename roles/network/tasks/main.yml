@@ -1,0 +1,24 @@
+---
+- name: Configure new network int
+  become: true
+  copy:
+    content: |
+      NAME=ens224
+      GATEWAY=192.168.40.1
+      DEVICE=ens224
+      ONBOOT=yes
+      USERCTL=no
+      BOOTPROTO=static
+      NETMASK=255.255.255.0
+      IPADDR=192.168.40.10
+      PEERDNS=no
+      IPV6INIT=no
+      IPV6_AUTOCONF=yes
+
+      check_link_down() {
+       return 1; 
+      }
+
+    dest: /etc/sysconfig/network-scripts/ifcfg-ens224
+  notify:
+    - network restart

@@ -1,0 +1,13 @@
+---
+- hosts: centos
+  become:
+    true
+  become_method:
+    su
+  become_user:
+    root
+  remote_user:
+    dzorenko
+  roles:
+   - network
+   - iptables
